@@ -29,7 +29,7 @@ describe "Trainer Show Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         pokemon1 = Pokemon.create!(
           name: "Pikachu",
-          type: "Electric",
+          pokemon_type: "Electric",
           level: 50,
           hit_points: 35,
           attack: 55,
@@ -41,7 +41,7 @@ describe "Trainer Show Page" do
         )
         pokemon2 = Pokemon.create!(
           name: "Charizard",
-          type: "Fire/Flying",
+          pokemon_type: "Fire/Flying",
           level: 40,
           hit_points: 78,
           attack: 84,
@@ -88,7 +88,7 @@ describe "Trainer Show Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         pokemon1 = Pokemon.create!(
           name: "Pikachu",
-          type: "Electric",
+          pokemon_type: "Electric",
           level: 50,
           hit_points: 35,
           attack: 55,

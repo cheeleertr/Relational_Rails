@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   get "/", to: "welcome#index"
   get "/trainers", to: "trainers#index"
   get "/trainers/:trainer_id", to: "trainers#show"
+  get "/pokemons", to: "pokemons#index"
+  get "/pokemons/:pokemon_id", to: "pokemons#show"
 end

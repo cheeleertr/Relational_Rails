@@ -1,0 +1,12 @@
+<% @pokemons.each do |pokemon|%>
+  <%= "Name: #{pokemon.name}"%>
+  <%= "Type: #{pokemon.pokemon_type}"%>
+  <%= "Level: #{pokemon.level}"%>
+  <%= "Hit Points: #{pokemon.hit_points}"%>
+  <%= "Attack: #{pokemon.attack}" %>
+  <%= "Defense: #{pokemon.defense}" %>
+  <%= "Speed: #{pokemon.speed}" %>
+  <%= "Special: #{pokemon.special}" %>
+  <%= "Trainer ID: #{pokemon.trainer_id}" %>
+  <%= "In Team: #{pokemon.in_team}" %>
+<% end %>

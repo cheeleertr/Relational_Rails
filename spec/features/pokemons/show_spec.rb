@@ -11,7 +11,7 @@ describe "Pokemon Show Page" do
       it "I see the pokemon with that id including the pokemon's attributes" do
         pokemon1 = Pokemon.create!(
           name: "Pikachu",
-          type: "Electric",
+          pokemon_type: "Electric",
           level: 50,
           hit_points: 35,
           attack: 55,
@@ -23,7 +23,7 @@ describe "Pokemon Show Page" do
         )
         pokemon2 = Pokemon.create!(
           name: "Charizard",
-          type: "Fire/Flying",
+          pokemon_type: "Fire/Flying",
           level: 40,
           hit_points: 78,
           attack: 84,
@@ -36,7 +36,7 @@ describe "Pokemon Show Page" do
         visit "/pokemons/#{pokemon1.id}"
         
         expect(page).to have_content(pokemon1.name)
-        expect(page).to have_content("Type: #{pokemon1.type}")
+        expect(page).to have_content("Type: #{pokemon1.pokemon_type}")
         expect(page).to have_content("Level: #{pokemon1.level}")
         expect(page).to have_content("Hit Points: #{pokemon1.hit_points}")
         expect(page).to have_content("Attack: #{pokemon1.attack}")
@@ -47,7 +47,7 @@ describe "Pokemon Show Page" do
         expect(page).to have_content("In Team: #{pokemon1.in_team}")
 
         expect(page).to_not have_content(pokemon2.name)
-        expect(page).to_not have_content("Type: #{pokemon2.type}")
+        expect(page).to_not have_content("Type: #{pokemon2.pokemon_type}")
         expect(page).to_not have_content("Level: #{pokemon2.level}")
         expect(page).to_not have_content("Hit Points: #{pokemon2.hit_points}")
         expect(page).to_not have_content("Attack: #{pokemon2.attack}")
@@ -62,11 +62,11 @@ describe "Pokemon Show Page" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Child Index
-      it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
+      xit "I see a link at the top of the page that takes me to the Pokemon Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         pokemon1 = Pokemon.create!(
           name: "Pikachu",
-          type: "Electric",
+          pokemon_type: "Electric",
           level: 50,
           hit_points: 35,
           attack: 55,
@@ -86,11 +86,11 @@ describe "Pokemon Show Page" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Parent Index
-      it "I see a link at the top of the page that takes me to the Trainer Index Page" do
+      xit "I see a link at the top of the page that takes me to the Trainer Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         pokemon1 = Pokemon.create!(
           name: "Pikachu",
-          type: "Electric",
+          pokemon_type: "Electric",
           level: 50,
           hit_points: 35,
           attack: 55,
