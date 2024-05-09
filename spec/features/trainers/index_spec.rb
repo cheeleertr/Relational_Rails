@@ -29,12 +29,15 @@ describe "Trainer Index Page" do
       it "I see that records are ordered by most recently created first and next to each of the records I see when it was created" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         trainer2 = Trainer.create!(name: "Misty", badges: 6 , full_team_of_six: false)
+        visit '/trainers'
 
         expect(page).to have_content("Created: #{trainer1.created_at}")
         expect(page).to have_content("Created: #{trainer2.created_at}")
-        #How do you test for sequencing?
         # orderly gem needed
+        # let(:this) { "Created: #{trainer1.created_at}" }
+        # let(:that) { "Created: #{trainer2.created_at}" }
 
+        expect("Name: #{trainer1.name}").to appear_before("Name: #{trainer2.name}")
       end
 
       # User Story 8, Child Index Link

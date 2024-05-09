@@ -25,9 +25,9 @@ describe "Trainer Show Page" do
       # As a visitor
       # When I visit a parent's show page
       # I see a count of the number of children associated with this parent
-      xit "I see a count of the number of children associated with this parent" do
+      it "I see a count of the number of children associated with this parent" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = Pokemon.create!(
+        pokemon1 = trainer1.pokemons.create!(
           name: "Pikachu",
           pokemon_type: "Electric",
           level: 50,
@@ -36,10 +36,10 @@ describe "Trainer Show Page" do
           defense: 30,
           speed: 90,
           special: 50,
-          trainer_id: 1,
+          # trainer_id: 1,
           in_team: true,
         )
-        pokemon2 = Pokemon.create!(
+        pokemon2 = trainer1.pokemons.create!(
           name: "Charizard",
           pokemon_type: "Fire/Flying",
           level: 40,
@@ -48,12 +48,12 @@ describe "Trainer Show Page" do
           defense: 78,
           speed: 100,
           special: 85,
-          trainer_id: 1,
+          # trainer_id: 1,
           in_team: false,
         )
         visit "/trainers/#{trainer1.id}"
         
-        expect(page).to have_content("Pokemons Count: #{trainer1.pokemon_count}")
+        expect(page).to have_content("Pokemons Count: #{trainer1.pokemons.count}")
       end
 
       # User Story 8, Child Index Link

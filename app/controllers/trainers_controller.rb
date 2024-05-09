@@ -1,10 +1,12 @@
 class TrainersController < ApplicationController
   def index
-    @trainers = Trainer.all
+    # pry
+    @trainers = Trainer.all.sort_by {|trainer| trainer.created_at}
   end
 
   def show
-    # binding.pry
     @trainer = Trainer.find(params[:trainer_id])
+    # binding.pry
+    @count = @trainer.pokemons.count
   end
 end
