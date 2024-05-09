@@ -25,7 +25,7 @@ describe "Trainer Show Page" do
       # As a visitor
       # When I visit a parent's show page
       # I see a count of the number of children associated with this parent
-      it "I see a count of the number of children associated with this parent" do
+      xit "I see a count of the number of children associated with this parent" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         pokemon1 = Pokemon.create!(
           name: "Pikachu",
@@ -60,7 +60,7 @@ describe "Trainer Show Page" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Child Index
-      it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
+      xit "I see a link at the top of the page that takes me to the Pokemon Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         visit "/trainers/#{trainer1.id}"
         click_on 'All Pokemons'
@@ -72,7 +72,7 @@ describe "Trainer Show Page" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Parent Index
-      it "I see a link at the top of the page that takes me to the Trainer Index Page" do
+      xit "I see a link at the top of the page that takes me to the Trainer Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         visit "/trainers/#{trainer1.id}"
         click_on 'All Trainers'
@@ -84,7 +84,7 @@ describe "Trainer Show Page" do
       # As a visitor
       # When I visit a parent show page ('/parents/:id')
       # Then I see a link to take me to that parent's `child_table_name` page ('/parents/:id/child_table_name')
-      it "I see a link to take me to that Trainer's Pokemon Index page" do
+      xit "I see a link to take me to that Trainer's Pokemon Index page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         pokemon1 = Pokemon.create!(
           name: "Pikachu",

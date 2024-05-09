@@ -82,7 +82,7 @@ describe "Trainer Pokemon Index" do
         # expect(page).to_not have_content("In Team: #{pokemon3.in_team}")
       end
 
-            # User Story 8, Child Index Link
+      # User Story 8, Child Index Link
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Child Index
