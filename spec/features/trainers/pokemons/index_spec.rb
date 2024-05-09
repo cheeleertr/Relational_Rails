@@ -87,9 +87,9 @@ describe "Trainer Pokemon Index" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Child Index
-      xit "I see a link at the top of the page that takes me to the Pokemon Index Page" do
+      it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = Pokemon.create!(
+        pokemon1 = trainer1.pokemons.create!(
           name: "Pikachu",
           pokemon_type: "Electric",
           level: 50,
@@ -98,10 +98,9 @@ describe "Trainer Pokemon Index" do
           defense: 30,
           speed: 90,
           special: 50,
-          trainer_id: 1,
           in_team: true,
         )
-        visit "/trainers/#{trainer1.id}/pokemon"
+        visit "/trainers/#{trainer1.id}/pokemons"
         click_on 'All Pokemons'
 
         expect(current_path).to eq("/pokemons")
@@ -111,9 +110,9 @@ describe "Trainer Pokemon Index" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Parent Index
-      xit "I see a link at the top of the page that takes me to the Trainer Index Page" do
+      it "I see a link at the top of the page that takes me to the Trainer Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = Pokemon.create!(
+        pokemon1 = trainer1.pokemons.create!(
           name: "Pikachu",
           pokemon_type: "Electric",
           level: 50,
@@ -122,10 +121,9 @@ describe "Trainer Pokemon Index" do
           defense: 30,
           speed: 90,
           special: 50,
-          trainer_id: 1,
           in_team: true,
         )
-        visit "/trainers/#{trainer1.id}/pokemon"
+        visit "/trainers/#{trainer1.id}/pokemons"
         click_on 'All Trainers'
 
         expect(current_path).to eq("/trainers")
