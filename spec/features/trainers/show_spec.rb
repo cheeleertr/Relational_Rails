@@ -84,9 +84,9 @@ describe "Trainer Show Page" do
       # As a visitor
       # When I visit a parent show page ('/parents/:id')
       # Then I see a link to take me to that parent's `child_table_name` page ('/parents/:id/child_table_name')
-      xit "I see a link to take me to that Trainer's Pokemon Index page" do
+      it "I see a link to take me to that Trainer's Pokemon Index page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = Pokemon.create!(
+        pokemon1 = trainer1.pokemons.create!(
           name: "Pikachu",
           pokemon_type: "Electric",
           level: 50,
@@ -95,13 +95,12 @@ describe "Trainer Show Page" do
           defense: 30,
           speed: 90,
           special: 50,
-          trainer_id: 1,
           in_team: true,
         )
         visit "/trainers/#{trainer1.id}"
         click_on "Trainer's Pokemons"
 
-        expect(current_path).to eq("/trainers/#{trainer1.id}/pokemon")
+        expect(current_path).to eq("/trainers/#{trainer1.id}/pokemons")
       end
     end
   end
