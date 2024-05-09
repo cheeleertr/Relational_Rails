@@ -72,7 +72,7 @@ describe "Trainer Show Page" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Parent Index
-      xit "I see a link at the top of the page that takes me to the Trainer Index Page" do
+      it "I see a link at the top of the page that takes me to the Trainer Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         visit "/trainers/#{trainer1.id}"
         click_on 'All Trainers'
