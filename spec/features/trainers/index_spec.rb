@@ -33,6 +33,7 @@ describe "Trainer Index Page" do
         expect(page).to have_content("Created: #{trainer1.created_at}")
         expect(page).to have_content("Created: #{trainer2.created_at}")
         #How do you test for sequencing?
+        # orderly gem needed
 
       end
 

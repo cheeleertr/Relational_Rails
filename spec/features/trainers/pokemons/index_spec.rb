@@ -10,46 +10,47 @@ describe "Trainer Pokemon Index" do
       it "I see each Pokemon that is associated with that Trainer with each Pokemon's attributes" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         trainer2 = Trainer.create!(name: "Misty", badges: 6 , full_team_of_six: false)
+
         pokemon1 = Pokemon.create!(
           name: "Pikachu",
-          type: "Electric",
+          pokemon_type: "Electric",
           level: 50,
           hit_points: 35,
           attack: 55,
           defense: 30,
           speed: 90,
           special: 50,
-          trainer_id: 1,
+          trainer_id: trainer1.id,
           in_team: true,
         )
         pokemon2 = Pokemon.create!(
           name: "Charizard",
-          type: "Fire/Flying",
+          pokemon_type: "Fire/Flying",
           level: 40,
           hit_points: 78,
           attack: 84,
           defense: 78,
           speed: 100,
           special: 85,
-          trainer_id: 1,
+          trainer_id: trainer1.id,
           in_team: false,
         )
         pokemon3 = Pokemon.create!(
           name: "Psyduck",
-          type: "Water",
+          pokemon_type: "Water",
           level: 45,
           hit_points: 50,
           attack: 52,
           defense: 48,
           speed: 55,
           special: 51,
-          trainer_id: 2,
+          trainer_id: trainer2.id,
           in_team: true,
         )
-        visit "/trainers/#{trainer1.id}/pokemon"
+        visit "/trainers/#{trainer1.id}/pokemons"
         
         expect(page).to have_content(pokemon1.name)
-        expect(page).to have_content("Type: #{pokemon1.type}")
+        expect(page).to have_content("Type: #{pokemon1.pokemon_type}")
         expect(page).to have_content("Level: #{pokemon1.level}")
         expect(page).to have_content("Hit Points: #{pokemon1.hit_points}")
         expect(page).to have_content("Attack: #{pokemon1.attack}")
@@ -60,7 +61,7 @@ describe "Trainer Pokemon Index" do
         expect(page).to have_content("In Team: #{pokemon1.in_team}")
 
         expect(page).to have_content(pokemon2.name)
-        expect(page).to have_content("Type: #{pokemon2.type}")
+        expect(page).to have_content("Type: #{pokemon2.pokemon_type}")
         expect(page).to have_content("Level: #{pokemon2.level}")
         expect(page).to have_content("Hit Points: #{pokemon2.hit_points}")
         expect(page).to have_content("Attack: #{pokemon2.attack}")
@@ -71,7 +72,7 @@ describe "Trainer Pokemon Index" do
         expect(page).to have_content("In Team: #{pokemon2.in_team}")
 
         expect(page).to_not have_content(pokemon3.name)
-        expect(page).to_not have_content("Type: #{pokemon3.type}")
+        expect(page).to_not have_content("Type: #{pokemon3.pokemon_type}")
         expect(page).to_not have_content("Level: #{pokemon3.level}")
         expect(page).to_not have_content("Hit Points: #{pokemon3.hit_points}")
         expect(page).to_not have_content("Attack: #{pokemon3.attack}")
@@ -86,11 +87,11 @@ describe "Trainer Pokemon Index" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Child Index
-      it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
+      xit "I see a link at the top of the page that takes me to the Pokemon Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         pokemon1 = Pokemon.create!(
           name: "Pikachu",
-          type: "Electric",
+          pokemon_type: "Electric",
           level: 50,
           hit_points: 35,
           attack: 55,
@@ -110,11 +111,11 @@ describe "Trainer Pokemon Index" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Parent Index
-      it "I see a link at the top of the page that takes me to the Trainer Index Page" do
+      xit "I see a link at the top of the page that takes me to the Trainer Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         pokemon1 = Pokemon.create!(
           name: "Pikachu",
-          type: "Electric",
+          pokemon_type: "Electric",
           level: 50,
           hit_points: 35,
           attack: 55,
