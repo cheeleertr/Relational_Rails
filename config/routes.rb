@@ -9,8 +9,12 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "/", to: "welcome#index"
   get "/trainers", to: "trainers#index"
+  get "/trainers/new", to: "trainers#new"
   get "/trainers/:trainer_id", to: "trainers#show"
   get "/pokemons", to: "pokemons#index"
   get "/pokemons/:pokemon_id", to: "pokemons#show"
   get "/trainers/:trainer_id/pokemons", to: "trainer_pokemons#index"
+  post "/trainers", to: "trainers#create"
+  get "/trainers/:trainer_id/edit", to: "trainers#edit"
+  patch "/trainers/:trainer_id", to: "trainers#update"
 end

@@ -1,0 +1,10 @@
+<%= link_to "All Trainers", "/trainers" %>
+<%= link_to "All Pokemons", "/pokemons" %>
+<form action="/trainers/<%= @trainer.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH" />
+  <p>Edit</p>
+  <input type="text" name="trainer[name]" value="<%= @trainer.name %>"/><br/>
+  <input type="text" name="trainer[badges]" value="<%= @trainer.badges %>"/><br/>
+  <input type="text" name="trainer[full_team_of_six]" value="<%= @trainer.full_team_of_six %>"/><br/>
+  <input type="submit" value="Update Trainer"/>
