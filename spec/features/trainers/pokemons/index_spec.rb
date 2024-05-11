@@ -164,7 +164,7 @@ describe "Trainer Pokemon Index" do
       # Then I see a link to sort children in alphabetical order
       # When I click on the link
       # I'm taken back to the Parent's children Index Page where I see all of the parent's children in alphabetical order
-      it "I can see the Trainer's Pokemons in alphabetical order" do
+      it "I can click link to see the Trainer's Pokemons in alphabetical order" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         pokemon1 = trainer1.pokemons.create!(
           name: "Pikachu",

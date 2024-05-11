@@ -7,11 +7,15 @@ describe "Trainer Index Page" do
   # When I visit '/parents'
   # Then I see the name of each parent record in the system
   context "As a visitor" do
+    before :each do
+      @trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
+      @trainer2 = Trainer.create!(name: "Misty", badges: 6 , full_team_of_six: false)
+
+    end
     describe "When I visit Trainer Index Page" do
       it "I see the name of each trainer record in the system" do
-        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        trainer2 = Trainer.create!(name: "Misty", badges: 6 , full_team_of_six: false)
         visit '/trainers'
+        # save_and_open_page
 
         expect(page).to have_content("Name: Ash")
         expect(page).to have_content("Name: Misty")
@@ -27,17 +31,15 @@ describe "Trainer Index Page" do
       # I see that records are ordered by most recently created first
       # And next to each of the records I see when it was created
       it "I see that records are ordered by most recently created first and next to each of the records I see when it was created" do
-        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        trainer2 = Trainer.create!(name: "Misty", badges: 6 , full_team_of_six: false)
         visit '/trainers'
 
-        expect(page).to have_content("Created: #{trainer1.created_at}")
-        expect(page).to have_content("Created: #{trainer2.created_at}")
+        expect(page).to have_content("Created: #{@trainer1.created_at}")
+        expect(page).to have_content("Created: #{@trainer2.created_at}")
         # orderly gem needed
-        # let(:this) { "Created: #{trainer1.created_at}" }
-        # let(:that) { "Created: #{trainer2.created_at}" }
+        # let(:this) { "Created: #{@trainer1.created_at}" }
+        # let(:that) { "Created: #{@trainer2.created_at}" }
 
-        expect("Name: #{trainer1.name}").to appear_before("Name: #{trainer2.name}")
+        expect("Name: #{@trainer1.name}").to appear_before("Name: #{@trainer2.name}")
       end
 
       # User Story 8, Child Index Link
@@ -45,7 +47,6 @@ describe "Trainer Index Page" do
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Child Index
       it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
-        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         visit "/trainers"
         click_on 'All Pokemons'
 
@@ -57,10 +58,8 @@ describe "Trainer Index Page" do
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Parent Index
       it "I see a link at the top of the page that takes me to the Trainer Index Page" do
-        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         visit "/trainers"
         click_on 'All Trainers'
-
         expect(current_path).to eq("/trainers")
       end
 
@@ -80,6 +79,20 @@ describe "Trainer Index Page" do
         click_on 'New Trainer'
 
         expect(current_path).to eq("/trainers/new")
+      end
+
+      # User Story 17, Parent Update From Parent Index Page 
+      # As a visitor
+      # When I visit the parent index page
+      # Next to every parent, I see a link to edit that parent's info
+      # When I click the link
+      # I should be taken to that parent's edit page where I can update its information 
+      it "can click on a link to edit Trainer's info" do
+        visit '/trainers'
+        # save_and_open_page
+        click_on "Update #{@trainer1.name}"
+
+        expect(current_path).to eq("/trainers/#{@trainer1.id}/edit")
       end
     end
   end
