@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   get "/pokemons/:pokemon_id/edit", to: "pokemons#edit"
   patch "/pokemons/:pokemon_id", to: "pokemons#update"
   delete "/trainers/:trainer_id", to: "trainers#destroy"
+  delete "/pokemons/:pokemon_id", to: "pokemons#destroy"
 end

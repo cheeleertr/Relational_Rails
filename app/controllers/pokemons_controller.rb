@@ -31,4 +31,11 @@ class PokemonsController < ApplicationController
 
     redirect_to "/pokemons/#{pokemon.id}"
   end
+
+  def destroy
+    pokemon = Pokemon.find(params[:pokemon_id])
+    pokemon.destroy
+
+    redirect_to "/pokemons"
+  end
 end
