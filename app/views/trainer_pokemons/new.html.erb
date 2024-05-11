@@ -1,0 +1,16 @@
+<%= link_to "All Trainers", "/trainers" %>
+<%= link_to "All Pokemons", "/pokemons" %>
+<form action="/trainers/<%= "#{@trainer.id}" %>/pokemons" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>Create a new Pokemon:</p>
+  Name: <input type='text' name='pokemon[name]'/><br/>
+  Type: <input type='text' name='pokemon[pokemon_type]'><br/>
+  Level: <input type='text' name='pokemon[level]'><br/>
+  Hit Points: <input type='text' name='pokemon[hit_points]'><br/>
+  Attack: <input type='text' name='pokemon[attack]'><br/>
+  Defense: <input type='text' name='pokemon[defense]'><br/>
+  Speed: <input type='text' name='pokemon[speed]'><br/>
+  Special: <input type='text' name='pokemon[special]'><br/>
+  In Team: <input type='text' name='pokemon[in_team]'><br/>
+  <input type='submit' value="Create Pokemon"/>
+</form>

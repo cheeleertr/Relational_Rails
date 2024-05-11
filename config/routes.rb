@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get "/pokemons", to: "pokemons#index"
   get "/pokemons/:pokemon_id", to: "pokemons#show"
   get "/trainers/:trainer_id/pokemons", to: "trainer_pokemons#index"
+  get "/trainers/:trainer_id/pokemons/new", to: "trainer_pokemons#new"
   post "/trainers", to: "trainers#create"
   get "/trainers/:trainer_id/edit", to: "trainers#edit"
   patch "/trainers/:trainer_id", to: "trainers#update"
+  post "/trainers/:trainer_id/pokemons", to: "trainer_pokemons#create"
 end

@@ -1,5 +1,6 @@
 <%= link_to "All Trainers", "/trainers" %>
 <%= link_to "All Pokemons", "/pokemons" %>
+<%= link_to "Create Pokemon", "/trainers/#{@trainer.id}/pokemons/new" %>
 <% @pokemons.each do |pokemon|%>
   <h3><%= "Name: #{pokemon.name}"%></h3>
   <p><%= "Type: #{pokemon.pokemon_type}"%></p>
