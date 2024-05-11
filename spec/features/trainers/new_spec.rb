@@ -24,7 +24,7 @@ describe "Trainer New Page" do
         expect(current_path).to eq("/trainers")
         expect(page).to have_content("Name: Brock")
         expect(page).to have_content("Badges: 5")
-        expect(page).to have_content("Full Team of Six: false")
+        expect(page).to have_content("Full Team: false")
       end
     end
   end

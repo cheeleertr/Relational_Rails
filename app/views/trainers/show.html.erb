@@ -6,4 +6,5 @@
 <p>Full Team: <%= @trainer.full_team_of_six %></p>
 <p>Pokemons Count: <%= @trainer.pokemons_count%></p>
 <%= link_to "Update Trainer", "/trainers/#{@trainer.id}/edit" %>
+<%= link_to "Delete #{@trainer.name}", "/trainers/#{@trainer.id}", method: :delete %>
 

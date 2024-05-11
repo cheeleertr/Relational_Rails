@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   post "/trainers/:trainer_id/pokemons", to: "trainer_pokemons#create"
   get "/pokemons/:pokemon_id/edit", to: "pokemons#edit"
   patch "/pokemons/:pokemon_id", to: "pokemons#update"
+  delete "/trainers/:trainer_id", to: "trainers#destroy"
 end

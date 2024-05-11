@@ -21,8 +21,8 @@ describe "Trainer Index Page" do
         expect(page).to have_content("Name: Misty")
         expect(page).to have_content("Badges: 8")
         expect(page).to have_content("Badges: 6")
-        expect(page).to have_content("Full Team of Six: true")
-        expect(page).to have_content("Full Team of Six: false")
+        expect(page).to have_content("Full Team: true")
+        expect(page).to have_content("Full Team: false")
       end
       
       # User Story 6, Parent Index sorted by Most Recently Created 
