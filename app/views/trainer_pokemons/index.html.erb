@@ -1,6 +1,8 @@
 <%= link_to "All Trainers", "/trainers" %>
 <%= link_to "All Pokemons", "/pokemons" %>
 <%= link_to "Create Pokemon", "/trainers/#{@trainer.id}/pokemons/new" %>
+<%= link_to "Sort by Name", "/trainers/#{@trainer.id}/pokemons?order=name" %>
+<%# /parents/:parent_id/children?order=name %>
 <% @pokemons.each do |pokemon|%>
   <h3><%= "Name: #{pokemon.name}"%></h3>
   <p><%= "Type: #{pokemon.pokemon_type}"%></p>

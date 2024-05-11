@@ -11,7 +11,7 @@ describe "Trainer Pokemon Index" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         trainer2 = Trainer.create!(name: "Misty", badges: 6 , full_team_of_six: false)
 
-        pokemon1 = Pokemon.create!(
+        pokemon1 = trainer1.pokemons.create!(
           name: "Pikachu",
           pokemon_type: "Electric",
           level: 50,
@@ -23,7 +23,7 @@ describe "Trainer Pokemon Index" do
           trainer_id: trainer1.id,
           in_team: true,
         )
-        pokemon2 = Pokemon.create!(
+        pokemon2 = trainer1.pokemons.create!(
           name: "Charizard",
           pokemon_type: "Fire/Flying",
           level: 40,
@@ -35,7 +35,7 @@ describe "Trainer Pokemon Index" do
           trainer_id: trainer1.id,
           in_team: false,
         )
-        pokemon3 = Pokemon.create!(
+        pokemon3 = trainer2.pokemons.create!(
           name: "Psyduck",
           pokemon_type: "Water",
           level: 45,
@@ -68,7 +68,6 @@ describe "Trainer Pokemon Index" do
         expect(page).to have_content("Defense: #{pokemon2.defense}")
         expect(page).to have_content("Speed: #{pokemon2.speed}")
         expect(page).to have_content("Special: #{pokemon2.special}")
-        # expect(page).to have_content("Trainer ID: #{pokemon2.trainer_id}")
         expect(page).to have_content("In Team: #{pokemon2.in_team}")
 
         expect(page).to_not have_content(pokemon3.name)
@@ -80,7 +79,6 @@ describe "Trainer Pokemon Index" do
         expect(page).to_not have_content("Speed: #{pokemon3.speed}")
         expect(page).to_not have_content("Special: #{pokemon3.special}")
         expect(page).to_not have_content("Trainer ID: #{pokemon3.trainer_id}")
-        # expect(page).to_not have_content("In Team: #{pokemon3.in_team}")
       end
 
       # User Story 8, Child Index Link
@@ -158,6 +156,55 @@ describe "Trainer Pokemon Index" do
         click_on "Create Pokemon"
         
         expect(current_path).to eq("/trainers/#{trainer2.id}/pokemons/new")
+      end
+
+      # User Story 16, Sort Parent's Children in Alphabetical Order by name 
+      # As a visitor
+      # When I visit the Parent's children Index Page
+      # Then I see a link to sort children in alphabetical order
+      # When I click on the link
+      # I'm taken back to the Parent's children Index Page where I see all of the parent's children in alphabetical order
+      it "I can see the Trainer's Pokemons in alphabetical order" do
+        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
+        pokemon1 = trainer1.pokemons.create!(
+          name: "Pikachu",
+          pokemon_type: "Electric",
+          level: 50,
+          hit_points: 35,
+          attack: 55,
+          defense: 30,
+          speed: 90,
+          special: 50,
+          in_team: true,
+        )
+        pokemon2 = trainer1.pokemons.create!(
+          name: "Charizard",
+          pokemon_type: "Fire/Flying",
+          level: 40,
+          hit_points: 78,
+          attack: 84,
+          defense: 78,
+          speed: 100,
+          special: 85,
+          in_team: false,
+        )
+        pokemon3 = trainer1.pokemons.create!(
+          name: "Squirtle",
+          pokemon_type: "Water",
+          level: 36,
+          hit_points: 44,
+          attack: 48,
+          defense: 65,
+          speed: 43,
+          special: 51,
+          in_team: true,
+        )
+        visit "/trainers/#{trainer1.id}/pokemons"
+        # save_and_open_page
+        click_on "Sort by Name"
+
+        expect("Name: #{pokemon2.name}").to appear_before("Name: #{pokemon1.name}")
+        expect("Name: #{pokemon1.name}").to appear_before("Name: #{pokemon3.name}")
       end
     end
   end
