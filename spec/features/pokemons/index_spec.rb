@@ -80,6 +80,58 @@ describe "Pokemon Index Page" do
 
         expect(current_path).to eq("/trainers")
       end
+
+      # User Story 15, Child Index only shows `true` Records 
+      # As a visitor
+      # When I visit the child index
+      # Then I only see records where the boolean column is `true`
+      it "I only see records where the boolean column is `true`" do
+        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
+        pokemon1 = trainer1.pokemons.create!(
+          name: "Pikachu",
+          pokemon_type: "Electric",
+          level: 50,
+          hit_points: 35,
+          attack: 55,
+          defense: 30,
+          speed: 90,
+          special: 50,
+          in_team: true,
+        )
+        pokemon2 = trainer1.pokemons.create!(
+          name: "Charizard",
+          pokemon_type: "Fire/Flying",
+          level: 40,
+          hit_points: 78,
+          attack: 84,
+          defense: 78,
+          speed: 100,
+          special: 85,
+          in_team: false,
+        )
+        visit "/pokemons"
+
+        expect(page).to have_content("Name: Pikachu")
+        expect(page).to have_content("Type: Electric")
+        expect(page).to have_content("Level: 50")
+        expect(page).to have_content("Hit Points: 35")
+        expect(page).to have_content("Attack: 55")
+        expect(page).to have_content("Defense: 30")
+        expect(page).to have_content("Speed: 90")
+        expect(page).to have_content("Special: 50")
+        expect(page).to have_content("Trainer ID: #{trainer1.id}")
+        expect(page).to have_content("In Team: true")
+
+        expect(page).to_not have_content("Name: Charizard")
+        expect(page).to_not have_content("Type: Fire/Flying")
+        expect(page).to_not have_content("Level: 40")
+        expect(page).to_not have_content("Hit Points: 78")
+        expect(page).to_not have_content("Attack: 84")
+        expect(page).to_not have_content("Defense: 78")
+        expect(page).to_not have_content("Speed: 100")
+        expect(page).to_not have_content("Special: 85")
+        expect(page).to_not have_content("In Team: false")
+      end
     end
   end
 end

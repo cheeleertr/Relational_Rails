@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Trainer New Page" do
+describe "Trainer Edit Page" do
   # User Story 12, Parent Update 
   # As a visitor
   # When I visit a parent show page

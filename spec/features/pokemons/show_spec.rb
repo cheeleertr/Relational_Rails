@@ -102,6 +102,37 @@ describe "Pokemon Show Page" do
 
         expect(current_path).to eq("/trainers")
       end
+
+      # User Story 14, Child Update 
+
+      # As a visitor
+      # When I visit a Child Show page
+      # Then I see a link to update that Child "Update Child"
+      # When I click the link
+      # I am taken to '/child_table_name/:id/edit' where I see a form to edit the child's attributes:
+      # When I click the button to submit the form "Update Child"
+      # Then a `PATCH` request is sent to '/child_table_name/:id',
+      # the child's data is updated,
+      # and I am redirected to the Child Show page where I see the Child's updated information
+      it "I see a link to update that Child 'Update Child'" do
+        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
+        pokemon1 = trainer1.pokemons.create!(
+          name: "Pikachu",
+          pokemon_type: "Electric",
+          level: 50,
+          hit_points: 35,
+          attack: 55,
+          defense: 30,
+          speed: 90,
+          special: 50,
+          in_team: true,
+        )
+
+        visit "/pokemons/#{pokemon1.id}"
+        click_on 'Update Pokemon'
+
+        expect(current_path).to eq("/pokemons/#{pokemon1.id}/edit")
+      end
     end
   end
 end

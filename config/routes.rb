@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   get "/trainers/:trainer_id/edit", to: "trainers#edit"
   patch "/trainers/:trainer_id", to: "trainers#update"
   post "/trainers/:trainer_id/pokemons", to: "trainer_pokemons#create"
+  get "/pokemons/:pokemon_id/edit", to: "pokemons#edit"
+  # post "/pokemons/:pokemon_id", to: "pokemons#update"
+  patch "/pokemons/:pokemon_id", to: "pokemons#update"
 end
