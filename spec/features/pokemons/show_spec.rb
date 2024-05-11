@@ -9,7 +9,8 @@ describe "Pokemon Show Page" do
   context "As a visitor" do
     describe "When I visit Pokemon Show Page" do
       it "I see the pokemon with that id including the pokemon's attributes" do
-        pokemon1 = Pokemon.create!(
+        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
+        pokemon1 = trainer1.pokemons.create!(
           name: "Pikachu",
           pokemon_type: "Electric",
           level: 50,
@@ -18,10 +19,9 @@ describe "Pokemon Show Page" do
           defense: 30,
           speed: 90,
           special: 50,
-          trainer_id: 1,
           in_team: true,
         )
-        pokemon2 = Pokemon.create!(
+        pokemon2 = trainer1.pokemons.create!(
           name: "Charizard",
           pokemon_type: "Fire/Flying",
           level: 40,
@@ -30,7 +30,6 @@ describe "Pokemon Show Page" do
           defense: 78,
           speed: 100,
           special: 85,
-          trainer_id: 1,
           in_team: false,
         )
         visit "/pokemons/#{pokemon1.id}"
@@ -62,9 +61,9 @@ describe "Pokemon Show Page" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Child Index
-      xit "I see a link at the top of the page that takes me to the Pokemon Index Page" do
+      it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = Pokemon.create!(
+        pokemon1 = trainer1.pokemons.create!(
           name: "Pikachu",
           pokemon_type: "Electric",
           level: 50,
@@ -73,7 +72,6 @@ describe "Pokemon Show Page" do
           defense: 30,
           speed: 90,
           special: 50,
-          trainer_id: 1,
           in_team: true,
         )
         visit "/pokemons/#{pokemon1.id}"
@@ -86,9 +84,9 @@ describe "Pokemon Show Page" do
       # As a visitor
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Parent Index
-      xit "I see a link at the top of the page that takes me to the Trainer Index Page" do
+      it "I see a link at the top of the page that takes me to the Trainer Index Page" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = Pokemon.create!(
+        pokemon1 = trainer1.pokemons.create!(
           name: "Pikachu",
           pokemon_type: "Electric",
           level: 50,
@@ -97,13 +95,43 @@ describe "Pokemon Show Page" do
           defense: 30,
           speed: 90,
           special: 50,
-          trainer_id: 1,
           in_team: true,
         )
         visit "/pokemons/#{pokemon1.id}"
         click_on 'All Trainers'
 
         expect(current_path).to eq("/trainers")
+      end
+
+      # User Story 14, Child Update 
+
+      # As a visitor
+      # When I visit a Child Show page
+      # Then I see a link to update that Child "Update Child"
+      # When I click the link
+      # I am taken to '/child_table_name/:id/edit' where I see a form to edit the child's attributes:
+      # When I click the button to submit the form "Update Child"
+      # Then a `PATCH` request is sent to '/child_table_name/:id',
+      # the child's data is updated,
+      # and I am redirected to the Child Show page where I see the Child's updated information
+      it "I see a link to update that Child 'Update Child'" do
+        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
+        pokemon1 = trainer1.pokemons.create!(
+          name: "Pikachu",
+          pokemon_type: "Electric",
+          level: 50,
+          hit_points: 35,
+          attack: 55,
+          defense: 30,
+          speed: 90,
+          special: 50,
+          in_team: true,
+        )
+
+        visit "/pokemons/#{pokemon1.id}"
+        click_on 'Update Pokemon'
+
+        expect(current_path).to eq("/pokemons/#{pokemon1.id}/edit")
       end
     end
   end

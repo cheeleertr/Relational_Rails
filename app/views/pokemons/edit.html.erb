@@ -1,0 +1,17 @@
+<%= link_to "All Trainers", "/trainers" %>
+<%= link_to "All Pokemons", "/pokemons" %>
+
+<form action="/pokemons/<%= @pokemon.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH" />
+  <p>Edit</p>
+  <input type="text" name="pokemon[name]" value="<%= @pokemon.name %>"/><br/>
+  <input type="text" name="pokemon[pokemon_type]" value="<%= @pokemon.pokemon_type %>"/><br/>
+  <input type="text" name="pokemon[level]" value="<%= @pokemon.level %>"/><br/>
+  <input type="text" name="pokemon[hit_points]" value="<%= @pokemon.hit_points %>"/><br/>
+  <input type="text" name="pokemon[attack]" value="<%= @pokemon.attack %>"/><br/>
+  <input type="text" name="pokemon[defense]" value="<%= @pokemon.defense %>"/><br/>
+  <input type="text" name="pokemon[speed]" value="<%= @pokemon.speed %>"/><br/>
+  <input type="text" name="pokemon[special]" value="<%= @pokemon.special %>"/><br/>
+  <input type="text" name="pokemon[in_team]" value="<%= @pokemon.in_team %>"/><br/>
+  <input type="submit" value="Update Pokemon"/>

@@ -1,0 +1,10 @@
+<%= link_to "All Trainers", "/trainers" %>
+<%= link_to "All Pokemons", "/pokemons" %>
+<form action="/trainers" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>Enter a new Trainer:</p>
+  Name: <input type='text' name='trainer[name]'/><br/>
+  Badges: <input type='text' name='trainer[badges]'><br/>
+  Full Team of Six: <input type='text' name='trainer[full_team_of_six]'><br/>
+  <input type='submit' value="Create Trainer"/>
+</form>
