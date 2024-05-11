@@ -7,20 +7,24 @@ describe "Pokemon Index Page" do
   # Then I see each Child in the system including the Child's attributes
   # (data from each column that is on the child table)
   context "As a visitor" do
+    before :each do
+      @trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
+      @pokemon1 = @trainer1.pokemons.create!(
+        name: "Pikachu",
+        pokemon_type: "Electric",
+        level: 50,
+        hit_points: 35,
+        attack: 55,
+        defense: 30,
+        speed: 90,
+        special: 50,
+        in_team: true,
+      )
+
+
+    end
     describe "When I visit Pokemon Index Page" do
       it "Then I see each Pokemon in the system including the Pokemon's attributes" do
-        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = trainer1.pokemons.create!(
-          name: "Pikachu",
-          pokemon_type: "Electric",
-          level: 50,
-          hit_points: 35,
-          attack: 55,
-          defense: 30,
-          speed: 90,
-          special: 50,
-          in_team: true,
-        )
         visit "/pokemons"
         
         expect(page).to have_content("Name: Pikachu")
@@ -31,7 +35,7 @@ describe "Pokemon Index Page" do
         expect(page).to have_content("Defense: 30")
         expect(page).to have_content("Speed: 90")
         expect(page).to have_content("Special: 50")
-        expect(page).to have_content("Trainer ID: #{trainer1.id}")
+        expect(page).to have_content("Trainer ID: #{@trainer1.id}")
         expect(page).to have_content("In Team: true")
       end
 
@@ -40,18 +44,6 @@ describe "Pokemon Index Page" do
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Child Index
       it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
-        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = trainer1.pokemons.create!(
-          name: "Pikachu",
-          pokemon_type: "Electric",
-          level: 50,
-          hit_points: 35,
-          attack: 55,
-          defense: 30,
-          speed: 90,
-          special: 50,
-          in_team: true,
-        )
         visit "/pokemons"
         click_on 'All Pokemons'
 
@@ -63,18 +55,6 @@ describe "Pokemon Index Page" do
       # When I visit any page on the site
       # Then I see a link at the top of the page that takes me to the Parent Index
       it "I see a link at the top of the page that takes me to the Trainer Index Page" do
-        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = trainer1.pokemons.create!(
-          name: "Pikachu",
-          pokemon_type: "Electric",
-          level: 50,
-          hit_points: 35,
-          attack: 55,
-          defense: 30,
-          speed: 90,
-          special: 50,
-          in_team: true,
-        )
         visit "/pokemons"
         click_on 'All Trainers'
 
@@ -86,19 +66,7 @@ describe "Pokemon Index Page" do
       # When I visit the child index
       # Then I only see records where the boolean column is `true`
       it "I only see records where the boolean column is `true`" do
-        trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
-        pokemon1 = trainer1.pokemons.create!(
-          name: "Pikachu",
-          pokemon_type: "Electric",
-          level: 50,
-          hit_points: 35,
-          attack: 55,
-          defense: 30,
-          speed: 90,
-          special: 50,
-          in_team: true,
-        )
-        pokemon2 = trainer1.pokemons.create!(
+        pokemon2 = @trainer1.pokemons.create!(
           name: "Charizard",
           pokemon_type: "Fire/Flying",
           level: 40,
@@ -119,7 +87,7 @@ describe "Pokemon Index Page" do
         expect(page).to have_content("Defense: 30")
         expect(page).to have_content("Speed: 90")
         expect(page).to have_content("Special: 50")
-        expect(page).to have_content("Trainer ID: #{trainer1.id}")
+        expect(page).to have_content("Trainer ID: #{@trainer1.id}")
         expect(page).to have_content("In Team: true")
 
         expect(page).to_not have_content("Name: Charizard")
@@ -131,6 +99,20 @@ describe "Pokemon Index Page" do
         expect(page).to_not have_content("Speed: 100")
         expect(page).to_not have_content("Special: 85")
         expect(page).to_not have_content("In Team: false")
+      end
+
+      # User Story 18, Child Update From Childs Index Page 
+      # As a visitor
+      # When I visit the `child_table_name` index page or a parent `child_table_name` index page
+      # Next to every child, I see a link to edit that child's info
+      # When I click the link
+      # I should be taken to that `child_table_name` edit page where I can update its information
+      it "can click on a link to edit Pokemon's info" do
+        visit '/pokemons'
+
+        click_on "Update #{@pokemon1.name}"
+
+        expect(current_path).to eq("/pokemons/#{@pokemon1.id}/edit")
       end
     end
   end

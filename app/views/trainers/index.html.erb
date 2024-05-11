@@ -2,7 +2,6 @@
 <%= link_to "All Pokemons", "/pokemons" %>
 <%= link_to "New Trainer", "/trainers/new" %>
 
-
 <% @trainers.each do |trainer|%>
   <h3><a href="/trainers/<%= trainer.id %>"><%= "Name: #{trainer.name}"%></a></h3>
   <p><%= "Badges: #{trainer.badges}"%></p>

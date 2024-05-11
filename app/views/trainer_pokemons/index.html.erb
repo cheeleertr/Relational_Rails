@@ -14,4 +14,5 @@
   <p><%= "Special: #{pokemon.special}" %></p>
   <p><%= "Trainer ID: #{pokemon.trainer_id}" %></p>
   <p><%= "In Team: #{pokemon.in_team}" %></p>
+  <%= link_to "Update #{pokemon.name}", "/pokemons/#{pokemon.id}/edit" %>
 <% end %>

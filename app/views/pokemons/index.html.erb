@@ -1,7 +1,6 @@
 <%= link_to "All Trainers", "/trainers" %>
 <%= link_to "All Pokemons", "/pokemons" %>
 
-
 <% @pokemons.each do |pokemon|%>
   <h3><%= "Name: #{pokemon.name}"%></h3>
   <p><%= "Type: #{pokemon.pokemon_type}"%></p>
@@ -13,4 +12,5 @@
   <p><%= "Special: #{pokemon.special}" %></p>
   <p><%= "Trainer ID: #{pokemon.trainer_id}" %></p>
   <p><%= "In Team: #{pokemon.in_team}" %></p>
+  <%= link_to "Update #{pokemon.name}", "/pokemons/#{pokemon.id}/edit" %>
 <% end %>
