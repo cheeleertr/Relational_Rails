@@ -148,7 +148,7 @@ describe "Trainer Pokemon Index" do
         expect("Name: #{@pokemon1.name}").to appear_before("Name: #{@pokemon3.name}")
       end
 
-            # User Story 18, Child Update From Childs Index Page 
+      # User Story 18, Child Update From Childs Index Page 
       # As a visitor
       # When I visit the `child_table_name` index page or a parent `child_table_name` index page
       # Next to every child, I see a link to edit that child's info
@@ -160,6 +160,59 @@ describe "Trainer Pokemon Index" do
         click_on "Update #{@pokemon1.name}"
 
         expect(current_path).to eq("/pokemons/#{@pokemon1.id}/edit")
+      end
+
+      # User Story 21, Display Records Over a Given Threshold 
+      # As a visitor
+      # When I visit the Parent's children Index Page
+      # I see a form that allows me to input a number value
+      # When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`'
+      # Then I am brought back to the current index page with only the records that meet that threshold shown.
+      xit "can click on link and display records over a given threshold" do
+        visit "trainers/#{@trainer1.id}/pokemons"
+        #not sure what this is asking
+        #filter by attribute that has integer as value?
+        #ex: 
+        
+        fill_in 
+        
+        click_on "Only return records with more than ' ' of Level"
+        #rename to "Filter Pokemons with Level over <form>"
+        #should I do this for all integer attributes?
+        
+        expect(current_path).to eq("/pokemons/#{@pokemon1.id}/edit")
+      end
+
+            # User Story 23, Child Delete From Childs Index Page 
+      # As a visitor
+      # When I visit the `child_table_name` index page or a parent `child_table_name` index page
+      # Next to every child, I see a link to delete that child
+      # When I click the link
+      # I should be taken to the `child_table_name` index page where I no longer see that child
+      it "has link by each pokemon to delete itself" do
+        visit "/trainers/#{@trainer1.id}/pokemons"
+
+        click_on "Delete #{@pokemon1.name}"
+
+        expect(current_path).to eq("/pokemons")
+
+        expect(page).to_not have_content("Name: Pikachu")
+        expect(page).to_not have_content("Type: Electric")
+        expect(page).to_not have_content("Level: 50")
+        expect(page).to_not have_content("Hit Points: 35")
+        expect(page).to_not have_content("Attack: 55")
+        expect(page).to_not have_content("Defense: 30")
+        expect(page).to_not have_content("Speed: 90")
+        expect(page).to_not have_content("Special: 50")
+
+        expect(page).to have_content("Name: Squirtle")
+        expect(page).to have_content("Type: Water")
+        expect(page).to have_content("Level: 36")
+        expect(page).to have_content("Hit Points: 44")
+        expect(page).to have_content("Attack: 48")
+        expect(page).to have_content("Defense: 65")
+        expect(page).to have_content("Speed: 43")
+        expect(page).to have_content("Special: 51")
       end
     end
   end

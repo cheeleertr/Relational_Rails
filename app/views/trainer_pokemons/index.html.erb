@@ -1,5 +1,3 @@
-<%= link_to "All Trainers", "/trainers" %>
-<%= link_to "All Pokemons", "/pokemons" %>
 <%= link_to "Create Pokemon", "/trainers/#{@trainer.id}/pokemons/new" %>
 <%= link_to "Sort by Name", "/trainers/#{@trainer.id}/pokemons?order=name" %>
 <%# /parents/:parent_id/children?order=name %>
@@ -15,4 +13,5 @@
   <p><%= "Trainer ID: #{pokemon.trainer_id}" %></p>
   <p><%= "In Team: #{pokemon.in_team}" %></p>
   <%= link_to "Update #{pokemon.name}", "/pokemons/#{pokemon.id}/edit" %>
+  <%= link_to "Delete #{pokemon.name}", "/pokemons/#{pokemon.id}/", method: :delete %>
 <% end %>

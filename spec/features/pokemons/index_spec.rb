@@ -114,6 +114,49 @@ describe "Pokemon Index Page" do
 
         expect(current_path).to eq("/pokemons/#{@pokemon1.id}/edit")
       end
+
+      # User Story 23, Child Delete From Childs Index Page 
+      # As a visitor
+      # When I visit the `child_table_name` index page or a parent `child_table_name` index page
+      # Next to every child, I see a link to delete that child
+      # When I click the link
+      # I should be taken to the `child_table_name` index page where I no longer see that child
+      it "has link by each pokemon to delete itself" do
+        pokemon3 = @trainer1.pokemons.create!(
+          name: "Squirtle",
+          pokemon_type: "Water",
+          level: 36,
+          hit_points: 44,
+          attack: 48,
+          defense: 65,
+          speed: 43,
+          special: 51,
+          in_team: true,
+        )
+        visit "/pokemons"
+
+        click_on "Delete #{@pokemon1.name}"
+
+        expect(current_path).to eq("/pokemons")
+
+        expect(page).to_not have_content("Name: Pikachu")
+        expect(page).to_not have_content("Type: Electric")
+        expect(page).to_not have_content("Level: 50")
+        expect(page).to_not have_content("Hit Points: 35")
+        expect(page).to_not have_content("Attack: 55")
+        expect(page).to_not have_content("Defense: 30")
+        expect(page).to_not have_content("Speed: 90")
+        expect(page).to_not have_content("Special: 50")
+
+        expect(page).to have_content("Name: Squirtle")
+        expect(page).to have_content("Type: Water")
+        expect(page).to have_content("Level: 36")
+        expect(page).to have_content("Hit Points: 44")
+        expect(page).to have_content("Attack: 48")
+        expect(page).to have_content("Defense: 65")
+        expect(page).to have_content("Speed: 43")
+        expect(page).to have_content("Special: 51")
+      end
     end
   end
 end

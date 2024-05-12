@@ -94,6 +94,27 @@ describe "Trainer Index Page" do
 
         expect(current_path).to eq("/trainers/#{@trainer1.id}/edit")
       end
+
+      # User Story 22, Parent Delete From Parent Index Page 
+      # As a visitor
+      # When I visit the parent index page
+      # Next to every parent, I see a link to delete that parent
+      # When I click the link
+      # I am returned to the Parent Index Page where I no longer see that parent
+      it "has a link for by each trainer to delete itself" do
+        visit '/trainers'
+
+        click_on "Delete #{@trainer1.name}"
+
+        expect(current_path).to eq("/trainers")
+
+        expect(page).to_not have_content("Name: Ash")
+        expect(page).to_not have_content("Full Team: true")
+        expect(page).to_not have_content("Badges: 8")
+        expect(page).to have_content("Name: Misty")
+        expect(page).to have_content("Badges: 6")
+        expect(page).to have_content("Full Team: false")
+      end
     end
   end
 end

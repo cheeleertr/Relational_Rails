@@ -1,5 +1,3 @@
-<%= link_to "All Trainers", "/trainers" %>
-<%= link_to "All Pokemons", "/pokemons" %>
 <%= link_to "New Trainer", "/trainers/new" %>
 
 <% @trainers.each do |trainer|%>
@@ -8,4 +6,5 @@
   <p><%= "Full Team: #{trainer.full_team_of_six}"%></p>
   <p><%= "Created: #{trainer.created_at}"%></p>
   <%= link_to "Update #{trainer.name}", "/trainers/#{trainer.id}/edit" %>
+  <%= link_to "Delete #{trainer.name}", "/trainers/#{trainer.id}", method: :delete %>
 <% end %>
