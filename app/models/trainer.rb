@@ -1,5 +1,5 @@
 class Trainer < ApplicationRecord
-  has_many :pokemons
+  has_many :pokemons, dependent: :destroy
 
   validates_presence_of :name
 
@@ -7,4 +7,6 @@ class Trainer < ApplicationRecord
     # @trainer = Trainer(params[:trainer_id])
     self.pokemons.count
   end
+
+
 end

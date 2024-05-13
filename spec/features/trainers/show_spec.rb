@@ -119,7 +119,13 @@ describe "Trainer Show Page" do
       # and I am redirected to the parent index page where I no longer see this parent
 
       it "I can see a click a link and delete Trainer" do
+        visit "/pokemons"
+        
+        expect(page).to have_content("Name: #{@pokemon1.name}")
+        # expect(page).to have_content("Name: #{@pokemon2.name}")
+
         visit "/trainers/#{@trainer1.id}"
+
 
         click_on "Delete #{@trainer1.name}"
 
@@ -131,6 +137,10 @@ describe "Trainer Show Page" do
         expect(page).to have_content("Name: #{@trainer2.name}")
         expect(page).to have_content("Badges: #{@trainer2.badges}")
         expect(page).to have_content("Full Team: #{@trainer2.full_team_of_six}")
+        visit "/pokemons"
+        
+        expect(page).to_not have_content("Name: #{@pokemon1.name}")
+        expect(page).to_not have_content("Name: #{@pokemon2.name}")
       end
     end
   end

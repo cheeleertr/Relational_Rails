@@ -1,7 +1,8 @@
 class TrainerPokemonsController < ApplicationController
   def index
     @trainer = Trainer.find(params[:trainer_id])
-    @pokemons = @trainer.pokemons.order(params[:order] || params[:id])
+    # pry
+    @pokemons = @trainer.pokemons.order(params[:order])
   end
 
   def new
