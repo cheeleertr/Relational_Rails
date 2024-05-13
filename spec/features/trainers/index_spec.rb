@@ -15,7 +15,6 @@ describe "Trainer Index Page" do
     describe "When I visit Trainer Index Page" do
       it "I see the name of each trainer record in the system" do
         visit '/trainers'
-        # save_and_open_page
 
         expect(page).to have_content("Name: Ash")
         expect(page).to have_content("Name: Misty")
@@ -48,6 +47,8 @@ describe "Trainer Index Page" do
       # Then I see a link at the top of the page that takes me to the Child Index
       it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
         visit "/trainers"
+
+        expect(page).to have_link("All Pokemons")
         click_on 'All Pokemons'
 
         expect(current_path).to eq("/pokemons")
@@ -59,7 +60,10 @@ describe "Trainer Index Page" do
       # Then I see a link at the top of the page that takes me to the Parent Index
       it "I see a link at the top of the page that takes me to the Trainer Index Page" do
         visit "/trainers"
+
+        expect(page).to have_link("All Trainers")
         click_on 'All Trainers'
+
         expect(current_path).to eq("/trainers")
       end
 
@@ -76,6 +80,8 @@ describe "Trainer Index Page" do
       # and I am redirected to the Parent Index page where I see the new Parent displayed.
       it "I see a link to create a new Trainer record, 'New Trainer'" do
         visit "/trainers"
+
+        expect(page).to have_link("New Trainer")
         click_on 'New Trainer'
 
         expect(current_path).to eq("/trainers/new")
@@ -89,7 +95,8 @@ describe "Trainer Index Page" do
       # I should be taken to that parent's edit page where I can update its information 
       it "can click on a link to edit Trainer's info" do
         visit '/trainers'
-        # save_and_open_page
+
+        expect(page).to have_link("Update #{@trainer1.name}")
         click_on "Update #{@trainer1.name}"
 
         expect(current_path).to eq("/trainers/#{@trainer1.id}/edit")
@@ -104,6 +111,7 @@ describe "Trainer Index Page" do
       it "has a link for by each trainer to delete itself" do
         visit '/trainers'
 
+        expect(page).to have_link("Delete #{@trainer1.name}")
         click_on "Delete #{@trainer1.name}"
 
         expect(current_path).to eq("/trainers")

@@ -66,6 +66,7 @@ describe "Pokemon Show Page" do
         visit "/pokemons/#{@pokemon1.id}"
         click_on 'All Pokemons'
 
+        expect(page).to have_link("All Pokemons")
         expect(current_path).to eq("/pokemons")
       end
 
@@ -77,6 +78,7 @@ describe "Pokemon Show Page" do
         visit "/pokemons/#{@pokemon1.id}"
         click_on 'All Trainers'
 
+        expect(page).to have_link("All Trainers")
         expect(current_path).to eq("/trainers")
       end
 
@@ -93,6 +95,8 @@ describe "Pokemon Show Page" do
       # and I am redirected to the Child Show page where I see the Child's updated information
       it "I see a link to update that Child 'Update Child'" do
         visit "/pokemons/#{@pokemon1.id}"
+
+        expect(page).to have_link("Update Pokemon")
         click_on 'Update Pokemon'
 
         expect(current_path).to eq("/pokemons/#{@pokemon1.id}/edit")
@@ -108,6 +112,8 @@ describe "Pokemon Show Page" do
       # and I am redirected to the child index page where I no longer see this child
       it "has a link that deletes current Pokemon" do
         visit "pokemons/#{@pokemon1.id}"
+
+        expect(page).to have_link("Delete #{@pokemon1.name}")
         click_on "Delete #{@pokemon1.name}"
         expect(current_path).to eq("/pokemons")
         

@@ -55,7 +55,7 @@ describe "Trainer Show Page" do
       it "I see a count of the number of children associated with this parent" do
         visit "/trainers/#{@trainer1.id}"
         
-        expect(page).to have_content("Pokemons Count: #{@trainer1.pokemons.count}")
+        expect(page).to have_content("Pokemons Count: 2")
       end
 
       # User Story 8, Child Index Link
@@ -64,6 +64,8 @@ describe "Trainer Show Page" do
       # Then I see a link at the top of the page that takes me to the Child Index
       it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
         visit "/trainers/#{@trainer1.id}"
+
+        expect(page).to have_link("All Pokemons")
         click_on 'All Pokemons'
 
         expect(current_path).to eq("/pokemons")
@@ -75,6 +77,8 @@ describe "Trainer Show Page" do
       # Then I see a link at the top of the page that takes me to the Parent Index
       it "I see a link at the top of the page that takes me to the Trainer Index Page" do
         visit "/trainers/#{@trainer1.id}"
+
+        expect(page).to have_link("All Trainers")
         click_on 'All Trainers'
 
         expect(current_path).to eq("/trainers")
@@ -86,6 +90,8 @@ describe "Trainer Show Page" do
       # Then I see a link to take me to that parent's `child_table_name` page ('/parents/:id/child_table_name')
       it "I see a link to take me to that Trainer's Pokemon Index page" do
         visit "/trainers/#{@trainer1.id}"
+
+        expect(page).to have_link("Trainer's Pokemons")
         click_on "Trainer's Pokemons"
 
         expect(current_path).to eq("/trainers/#{@trainer1.id}/pokemons")
@@ -104,6 +110,8 @@ describe "Trainer Show Page" do
       # and I am redirected to the Parent's Show page where I see the parent's updated info
       it "I see a link to update the parent 'Update Parent'" do
         visit "/trainers/#{@trainer1.id}"
+
+        expect(page).to have_link("Update Trainer")
         click_on 'Update Trainer'
 
         expect(current_path).to eq("/trainers/#{@trainer1.id}/edit")
@@ -122,11 +130,10 @@ describe "Trainer Show Page" do
         visit "/pokemons"
         
         expect(page).to have_content("Name: #{@pokemon1.name}")
-        # expect(page).to have_content("Name: #{@pokemon2.name}")
-
+        
         visit "/trainers/#{@trainer1.id}"
-
-
+        
+        expect(page).to have_link("Delete #{@trainer1.name}")
         click_on "Delete #{@trainer1.name}"
 
         expect(current_path).to eq("/trainers")
@@ -137,6 +144,7 @@ describe "Trainer Show Page" do
         expect(page).to have_content("Name: #{@trainer2.name}")
         expect(page).to have_content("Badges: #{@trainer2.badges}")
         expect(page).to have_content("Full Team: #{@trainer2.full_team_of_six}")
+        
         visit "/pokemons"
         
         expect(page).to_not have_content("Name: #{@pokemon1.name}")

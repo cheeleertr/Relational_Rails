@@ -42,7 +42,7 @@ describe "Trainer Pokemons New Page" do
         click_on "Create Pokemon"
 
         expect(current_path).to eq("/trainers/#{trainer2.id}/pokemons")
-        # save_and_open_page
+
         expect(page).to have_content("Name: Magikarp")
         expect(page).to have_content("Type: Water")
         expect(page).to have_content("Level: 15")
@@ -52,7 +52,6 @@ describe "Trainer Pokemons New Page" do
         expect(page).to have_content("Speed: 80")
         expect(page).to have_content("Special: 20")
         expect(page).to have_content("In Team: false")
-        # end
       end
     end
   end

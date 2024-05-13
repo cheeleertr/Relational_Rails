@@ -58,8 +58,9 @@ describe "Trainer Pokemon Index" do
         in_team: true,
         )
       end
+
     describe "When I visit Trainer Pokemon Index" do
-      it "I see each Pokemon that is associated with that Trainer with each Pokemon's attributes" do
+      scenario "I see each Pokemon that is associated with that Trainer with each Pokemon's attributes" do
         visit "/trainers/#{@trainer1.id}/pokemons"
         
         expect(page).to have_content(@pokemon1.name)
@@ -99,6 +100,8 @@ describe "Trainer Pokemon Index" do
       # Then I see a link at the top of the page that takes me to the Child Index
       it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
         visit "/trainers/#{@trainer1.id}/pokemons"
+
+        expect(page).to have_link("All Pokemons")
         click_on 'All Pokemons'
 
         expect(current_path).to eq("/pokemons")
@@ -110,6 +113,8 @@ describe "Trainer Pokemon Index" do
       # Then I see a link at the top of the page that takes me to the Parent Index
       it "I see a link at the top of the page that takes me to the Trainer Index Page" do
         visit "/trainers/#{@trainer1.id}/pokemons"
+
+        expect(page).to have_link("All Trainers")
         click_on 'All Trainers'
 
         expect(current_path).to eq("/trainers")
@@ -128,6 +133,8 @@ describe "Trainer Pokemon Index" do
       # and I am redirected to the Parent Childs Index page where I can see the new child listed
       it "I see a link to add a new adoptable child for that parent 'Create Child'" do
         visit "/trainers/#{@trainer2.id}/pokemons"
+
+        expect(page).to have_link("Create Pokemon")
         click_on "Create Pokemon"
         
         expect(current_path).to eq("/trainers/#{@trainer2.id}/pokemons/new")
@@ -142,6 +149,7 @@ describe "Trainer Pokemon Index" do
       it "I can click link to see the Trainer's Pokemons in alphabetical order" do
         visit "/trainers/#{@trainer1.id}/pokemons"
 
+        expect(page).to have_link("Sort by Name")
         click_on "Sort by Name"
 
         expect("Name: #{@pokemon2.name}").to appear_before("Name: #{@pokemon1.name}")
@@ -157,6 +165,9 @@ describe "Trainer Pokemon Index" do
       it "can click on a link to edit Pokemon's info" do
         visit "trainers/#{@trainer1.id}/pokemons"
         
+        expect(page).to have_link("Update #{@pokemon1.name}")
+        expect(page).to have_link("Update #{@pokemon2.name}")
+        expect(page).to have_link("Update #{@pokemon3.name}")
         click_on "Update #{@pokemon1.name}"
 
         expect(current_path).to eq("/pokemons/#{@pokemon1.id}/edit")
@@ -192,6 +203,9 @@ describe "Trainer Pokemon Index" do
       it "has link by each pokemon to delete itself" do
         visit "/trainers/#{@trainer1.id}/pokemons"
 
+        expect(page).to have_link("Delete #{@pokemon1.name}")
+        expect(page).to have_link("Delete #{@pokemon2.name}")
+        expect(page).to have_link("Delete #{@pokemon3.name}")
         click_on "Delete #{@pokemon1.name}"
 
         expect(current_path).to eq("/pokemons")

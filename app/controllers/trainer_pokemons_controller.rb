@@ -3,6 +3,9 @@ class TrainerPokemonsController < ApplicationController
     @trainer = Trainer.find(params[:trainer_id])
     # pry
     @pokemons = @trainer.pokemons.order(params[:order])
+    #write method and spec for #sort_by_name
+    # change to conditional if params[:order].exist?
+
   end
 
   def new

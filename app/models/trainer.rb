@@ -5,7 +5,7 @@ class Trainer < ApplicationRecord
 
   def pokemons_count
     # @trainer = Trainer(params[:trainer_id])
-    self.pokemons.count
+    pokemons.count
   end
 
 
