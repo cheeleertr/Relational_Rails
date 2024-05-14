@@ -1,6 +1,3 @@
-<%= link_to "All Trainers", "/trainers" %>
-<%= link_to "All Pokemons", "/pokemons" %>
-
 <form action="/pokemons/<%= @pokemon.id %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="PATCH" />

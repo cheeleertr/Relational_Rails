@@ -16,20 +16,19 @@ describe "Trainer Pokemons New Page" do
     describe "When I visit Trainer Pokemons New Page" do
       it "I can create a new Pokemon" do
         trainer2 = Trainer.create!(name: "Misty", badges: 6 , full_team_of_six: false)
-        pokemon3 = Pokemon.create!(
-          name: "Psyduck",
-          pokemon_type: "Water",
-          level: 45,
-          hit_points: 50,
-          attack: 52,
-          defense: 48,
-          speed: 55,
-          special: 51,
-          trainer_id: trainer2.id,
-          in_team: true,
-        )
         
         visit "trainers/#{trainer2.id}/pokemons/new"
+
+        expect(page).to have_field("pokemon[name]")
+        expect(page).to have_field("pokemon[pokemon_type]")
+        expect(page).to have_field("pokemon[level]")
+        expect(page).to have_field("pokemon[hit_points]")
+        expect(page).to have_field("pokemon[attack]")
+        expect(page).to have_field("pokemon[defense]")
+        expect(page).to have_field("pokemon[speed]")
+        expect(page).to have_field("pokemon[special]")
+        expect(page).to have_field("pokemon[in_team]")
+        
         fill_in "pokemon[name]", with: "Magikarp"
         fill_in "pokemon[pokemon_type]", with: "Water"
         fill_in "pokemon[level]", with: "15"
@@ -42,7 +41,7 @@ describe "Trainer Pokemons New Page" do
         click_on "Create Pokemon"
 
         expect(current_path).to eq("/trainers/#{trainer2.id}/pokemons")
-        # save_and_open_page
+
         expect(page).to have_content("Name: Magikarp")
         expect(page).to have_content("Type: Water")
         expect(page).to have_content("Level: 15")
@@ -52,7 +51,6 @@ describe "Trainer Pokemons New Page" do
         expect(page).to have_content("Speed: 80")
         expect(page).to have_content("Special: 20")
         expect(page).to have_content("In Team: false")
-        # end
       end
     end
   end

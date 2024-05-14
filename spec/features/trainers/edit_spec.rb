@@ -17,8 +17,14 @@ describe "Trainer Edit Page" do
       it "I can update a Trainer's attributes" do
         trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
         visit "/trainers/#{trainer1.id}"
+
+        expect(page).to have_link("Update Trainer")
         click_on 'Update Trainer'
 
+        expect(page).to have_field("trainer[name]")
+        expect(page).to have_field("trainer[badges]")
+        expect(page).to have_field("trainer[full_team_of_six]")
+        
         fill_in "trainer[name]", with: "Ash Ketchum"
         fill_in "trainer[badges]", with: 9
         fill_in "trainer[full_team_of_six]", with: false

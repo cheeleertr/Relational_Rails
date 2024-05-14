@@ -58,8 +58,9 @@ describe "Trainer Pokemon Index" do
         in_team: true,
         )
       end
+
     describe "When I visit Trainer Pokemon Index" do
-      it "I see each Pokemon that is associated with that Trainer with each Pokemon's attributes" do
+      scenario "I see each Pokemon that is associated with that Trainer with each Pokemon's attributes" do
         visit "/trainers/#{@trainer1.id}/pokemons"
         
         expect(page).to have_content(@pokemon1.name)
@@ -99,6 +100,8 @@ describe "Trainer Pokemon Index" do
       # Then I see a link at the top of the page that takes me to the Child Index
       it "I see a link at the top of the page that takes me to the Pokemon Index Page" do
         visit "/trainers/#{@trainer1.id}/pokemons"
+
+        expect(page).to have_link("All Pokemons")
         click_on 'All Pokemons'
 
         expect(current_path).to eq("/pokemons")
@@ -110,6 +113,8 @@ describe "Trainer Pokemon Index" do
       # Then I see a link at the top of the page that takes me to the Parent Index
       it "I see a link at the top of the page that takes me to the Trainer Index Page" do
         visit "/trainers/#{@trainer1.id}/pokemons"
+
+        expect(page).to have_link("All Trainers")
         click_on 'All Trainers'
 
         expect(current_path).to eq("/trainers")
@@ -128,6 +133,8 @@ describe "Trainer Pokemon Index" do
       # and I am redirected to the Parent Childs Index page where I can see the new child listed
       it "I see a link to add a new adoptable child for that parent 'Create Child'" do
         visit "/trainers/#{@trainer2.id}/pokemons"
+
+        expect(page).to have_link("Create Pokemon")
         click_on "Create Pokemon"
         
         expect(current_path).to eq("/trainers/#{@trainer2.id}/pokemons/new")
@@ -142,13 +149,14 @@ describe "Trainer Pokemon Index" do
       it "I can click link to see the Trainer's Pokemons in alphabetical order" do
         visit "/trainers/#{@trainer1.id}/pokemons"
 
+        expect(page).to have_link("Sort by Name")
         click_on "Sort by Name"
 
         expect("Name: #{@pokemon2.name}").to appear_before("Name: #{@pokemon1.name}")
         expect("Name: #{@pokemon1.name}").to appear_before("Name: #{@pokemon3.name}")
       end
 
-            # User Story 18, Child Update From Childs Index Page 
+      # User Story 18, Child Update From Childs Index Page 
       # As a visitor
       # When I visit the `child_table_name` index page or a parent `child_table_name` index page
       # Next to every child, I see a link to edit that child's info
@@ -157,9 +165,75 @@ describe "Trainer Pokemon Index" do
       it "can click on a link to edit Pokemon's info" do
         visit "trainers/#{@trainer1.id}/pokemons"
         
+        expect(page).to have_link("Update #{@pokemon1.name}")
+        expect(page).to have_link("Update #{@pokemon2.name}")
+        expect(page).to have_link("Update #{@pokemon3.name}")
         click_on "Update #{@pokemon1.name}"
 
         expect(current_path).to eq("/pokemons/#{@pokemon1.id}/edit")
+      end
+
+      # User Story 21, Display Records Over a Given Threshold 
+      # As a visitor
+      # When I visit the Parent's children Index Page
+      # I see a form that allows me to input a number value
+      # When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`'
+      # Then I am brought back to the current index page with only the records that meet that threshold shown.
+      it "can click on link and display records over a given threshold" do
+        visit "trainers/#{@trainer1.id}/pokemons"
+
+        expect(page).to have_content("Name: Pikachu")
+        expect(page).to have_content("Name: Squirtle")
+        expect(page).to have_field("threshold")
+        #not sure what this is asking
+        #filter by attribute that has integer as value?
+        
+        fill_in "threshold", with: 44
+        # click_on "Only return records with more than 'number' of Level"
+        # save_and_open_page
+        expect(page).to have_content("Only return pokemons with level over:")
+        click_on "Filter"
+        #reworded for readablility"
+        
+        expect(current_path).to eq("/trainers/#{@trainer1.id}/pokemons")
+
+        expect(page).to have_content("Name: Pikachu")
+        expect(page).to_not have_content("Name: Squirtle")
+      end
+
+            # User Story 23, Child Delete From Childs Index Page 
+      # As a visitor
+      # When I visit the `child_table_name` index page or a parent `child_table_name` index page
+      # Next to every child, I see a link to delete that child
+      # When I click the link
+      # I should be taken to the `child_table_name` index page where I no longer see that child
+      it "has link by each pokemon to delete itself" do
+        visit "/trainers/#{@trainer1.id}/pokemons"
+
+        expect(page).to have_link("Delete #{@pokemon1.name}")
+        expect(page).to have_link("Delete #{@pokemon2.name}")
+        expect(page).to have_link("Delete #{@pokemon3.name}")
+        click_on "Delete #{@pokemon1.name}"
+
+        expect(current_path).to eq("/pokemons")
+
+        expect(page).to_not have_content("Name: Pikachu")
+        expect(page).to_not have_content("Type: Electric")
+        expect(page).to_not have_content("Level: 50")
+        expect(page).to_not have_content("Hit Points: 35")
+        expect(page).to_not have_content("Attack: 55")
+        expect(page).to_not have_content("Defense: 30")
+        expect(page).to_not have_content("Speed: 90")
+        expect(page).to_not have_content("Special: 50")
+
+        expect(page).to have_content("Name: Squirtle")
+        expect(page).to have_content("Type: Water")
+        expect(page).to have_content("Level: 36")
+        expect(page).to have_content("Hit Points: 44")
+        expect(page).to have_content("Attack: 48")
+        expect(page).to have_content("Defense: 65")
+        expect(page).to have_content("Speed: 43")
+        expect(page).to have_content("Special: 51")
       end
     end
   end

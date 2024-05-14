@@ -1,8 +1,7 @@
 class PokemonsController < ApplicationController
   def index
-    @pokemons = Pokemon.where(in_team: true)
-    # @pokemons = Pokemon.all
-    
+    # @pokemons = Pokemon.where(in_team: true)
+    @pokemons = Pokemon.in_team_true
   end
 
   def show
@@ -30,5 +29,12 @@ class PokemonsController < ApplicationController
     pokemon.save
 
     redirect_to "/pokemons/#{pokemon.id}"
+  end
+
+  def destroy
+    pokemon = Pokemon.find(params[:pokemon_id])
+    pokemon.destroy
+
+    redirect_to "/pokemons"
   end
 end

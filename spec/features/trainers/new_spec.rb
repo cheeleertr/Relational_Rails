@@ -16,6 +16,11 @@ describe "Trainer New Page" do
     describe "When I visit Trainer New Page" do
       it "I can create a new Trainer" do
         visit '/trainers/new' 
+        
+        expect(page).to have_field("trainer[name]")
+        expect(page).to have_field("trainer[badges]")
+        expect(page).to have_field("trainer[full_team_of_six]")
+        
         fill_in "trainer[name]", with: "Brock"
         fill_in "trainer[badges]", with: 5
         fill_in "trainer[full_team_of_six]", with: false
@@ -24,7 +29,7 @@ describe "Trainer New Page" do
         expect(current_path).to eq("/trainers")
         expect(page).to have_content("Name: Brock")
         expect(page).to have_content("Badges: 5")
-        expect(page).to have_content("Full Team of Six: false")
+        expect(page).to have_content("Full Team: false")
       end
     end
   end
