@@ -8,6 +8,14 @@ class TrainerPokemonsController < ApplicationController
       @pokemons = @trainer.pokemons
     end
 
+    if params[:threshold].present?
+      # pry
+      @pokemons = @trainer.pokemons_over_level(params[:threshold])
+    else
+      @pokemons
+    end
+    #may have to combine order and threshold when using both?
+
   end
 
   def new

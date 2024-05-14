@@ -60,6 +60,14 @@ describe Trainer, type: :model do
         expect(@trainer1.pokemons_by_name).to eq([@pokemon2, @pokemon1, @pokemon3])
       end
     end
+
+    describe '#pokemons_over_level(number)' do
+      it 'returns trainers pokemon over a certain level' do
+        
+        expect(@trainer1.pokemons_over_level(42)).to eq([@pokemon1])
+        expect(@trainer1.pokemons_over_level(39)).to eq([@pokemon1, @pokemon2])
+      end
+    end
   end
 
   describe 'class methods' do

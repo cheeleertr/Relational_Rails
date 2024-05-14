@@ -11,6 +11,10 @@ class Trainer < ApplicationRecord
     pokemons.order(:name)
   end
 
+  def pokemons_over_level(number)
+    pokemons.where("level > #{number}")
+  end
+
   def self.by_created_at
     order(:created_at)
   end

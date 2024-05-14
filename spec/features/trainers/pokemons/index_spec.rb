@@ -179,19 +179,26 @@ describe "Trainer Pokemon Index" do
       # I see a form that allows me to input a number value
       # When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`'
       # Then I am brought back to the current index page with only the records that meet that threshold shown.
-      xit "can click on link and display records over a given threshold" do
+      it "can click on link and display records over a given threshold" do
         visit "trainers/#{@trainer1.id}/pokemons"
+
+        expect(page).to have_content("Name: Pikachu")
+        expect(page).to have_content("Name: Squirtle")
+        expect(page).to have_field("threshold")
         #not sure what this is asking
         #filter by attribute that has integer as value?
-        #ex: 
         
-        fill_in 
+        fill_in "threshold", with: 44
+        # click_on "Only return records with more than 'number' of Level"
+        # save_and_open_page
+        expect(page).to have_content("Only return pokemons with level over:")
+        click_on "Filter"
+        #reworded for readablility"
         
-        click_on "Only return records with more than ' ' of Level"
-        #rename to "Filter Pokemons with Level over <form>"
-        #should I do this for all integer attributes?
-        
-        expect(current_path).to eq("/pokemons/#{@pokemon1.id}/edit")
+        expect(current_path).to eq("/trainers/#{@trainer1.id}/pokemons")
+
+        expect(page).to have_content("Name: Pikachu")
+        expect(page).to_not have_content("Name: Squirtle")
       end
 
             # User Story 23, Child Delete From Childs Index Page 
