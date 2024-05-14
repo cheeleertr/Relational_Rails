@@ -1,12 +1,17 @@
 class Trainer < ApplicationRecord
-  has_many :pokemons, dependent: :destroy
+  has_many :pokemons, dependent: :destroy #destroy may not be the best way per khoa
 
   validates_presence_of :name
 
   def pokemons_count
-    # @trainer = Trainer(params[:trainer_id])
     pokemons.count
   end
 
+  def pokemons_by_name
+    pokemons.order(:name)
+  end
 
+  def self.by_created_at
+    order(:created_at)
+  end
 end

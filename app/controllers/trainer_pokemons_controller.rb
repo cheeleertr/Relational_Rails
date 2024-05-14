@@ -1,21 +1,22 @@
 class TrainerPokemonsController < ApplicationController
   def index
     @trainer = Trainer.find(params[:trainer_id])
-    # pry
-    @pokemons = @trainer.pokemons.order(params[:order])
-    #write method and spec for #sort_by_name
-    # change to conditional if params[:order].exist?
+    # @pokemons = @trainer.pokemons.order(params[:order])
+    if params[:order].present?
+      @pokemons = @trainer.pokemons_by_name
+    else
+      @pokemons = @trainer.pokemons
+    end
 
   end
 
   def new
-    # pry
     @trainer = Trainer.find(params[:trainer_id])
   end
 
   def create
     #need to create a trainer to create pokemon
-    # pry
+    #could use private params
     trainer = Trainer.find(params[:trainer_id])
     pokemon = trainer.pokemons.new({
       name: params[:pokemon][:name],

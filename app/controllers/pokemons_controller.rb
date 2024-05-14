@@ -1,8 +1,7 @@
 class PokemonsController < ApplicationController
   def index
-    @pokemons = Pokemon.where(in_team: true)
-    # @pokemons = Pokemon.all
-    
+    # @pokemons = Pokemon.where(in_team: true)
+    @pokemons = Pokemon.in_team_true
   end
 
   def show
