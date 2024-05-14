@@ -12,6 +12,7 @@ describe "Trainer Index Page" do
       @trainer2 = Trainer.create!(name: "Misty", badges: 6 , full_team_of_six: false)
 
     end
+
     describe "When I visit Trainer Index Page" do
       it "I see the name of each trainer record in the system" do
         visit '/trainers'
@@ -34,9 +35,6 @@ describe "Trainer Index Page" do
 
         expect(page).to have_content("Created: #{@trainer1.created_at}")
         expect(page).to have_content("Created: #{@trainer2.created_at}")
-        # orderly gem needed
-        # let(:this) { "Created: #{@trainer1.created_at}" }
-        # let(:that) { "Created: #{@trainer2.created_at}" }
 
         expect("Name: #{@trainer1.name}").to appear_before("Name: #{@trainer2.name}")
       end
@@ -97,6 +95,7 @@ describe "Trainer Index Page" do
         visit '/trainers'
 
         expect(page).to have_link("Update #{@trainer1.name}")
+        expect(page).to have_link("Update #{@trainer2.name}")
         click_on "Update #{@trainer1.name}"
 
         expect(current_path).to eq("/trainers/#{@trainer1.id}/edit")
@@ -112,6 +111,7 @@ describe "Trainer Index Page" do
         visit '/trainers'
 
         expect(page).to have_link("Delete #{@trainer1.name}")
+        expect(page).to have_link("Delete #{@trainer2.name}")
         click_on "Delete #{@trainer1.name}"
 
         expect(current_path).to eq("/trainers")

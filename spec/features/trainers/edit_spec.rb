@@ -21,6 +21,10 @@ describe "Trainer Edit Page" do
         expect(page).to have_link("Update Trainer")
         click_on 'Update Trainer'
 
+        expect(page).to have_field("trainer[name]")
+        expect(page).to have_field("trainer[badges]")
+        expect(page).to have_field("trainer[full_team_of_six]")
+        
         fill_in "trainer[name]", with: "Ash Ketchum"
         fill_in "trainer[badges]", with: 9
         fill_in "trainer[full_team_of_six]", with: false

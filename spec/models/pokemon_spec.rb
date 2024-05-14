@@ -12,17 +12,7 @@ describe Pokemon, type: :model do
   # describe "instance methods" do
     
   # end
-  # describe '#sort_by_created_at' do
-  #   it 'sorts trainers by created at' do
-  #     @trainer1 = Trainer.create!(name: "Ash", badges: 8, full_team_of_six: true)
-  #     @trainer2 = Trainer.create!(name: "Misy", badges: 6, full_team_of_six: false)
-  #     @trainer3 = Trainer.create!(name: "Brock", badges: 5, full_team_of_six: false)
-  #     # pry
-  #     # time stamps are different in pry
-  #     expect(Trainer.pokemons_count).to eq([@trainer1, @trainer2, @trainer3])
-  #     expect(Trainer.sort_by_created_at).to eq([@trainer1, @trainer2, @trainer3])
-  #   end
-  # end
+
   describe 'class methods' do
     before :each do
       @trainer1 = Trainer.create!(name: "Ash", badges: 8 , full_team_of_six: true)
@@ -60,13 +50,6 @@ describe Pokemon, type: :model do
         in_team: true,
       )
     end
-
-    # describe '::sort_by' do
-    #   it 'can sort all pokemons by an attribute' do
-
-    #     expect(Pokemon.sort_by("name")).to eq([@pokemon2, @pokemon1, @pokemon3])
-    #   end
-    # end
 
     describe '#in_team_true' do
       it 'returns pokemon with in_team attribute = true' do

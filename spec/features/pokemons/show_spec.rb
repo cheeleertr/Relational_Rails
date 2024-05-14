@@ -115,6 +115,7 @@ describe "Pokemon Show Page" do
 
         expect(page).to have_link("Delete #{@pokemon1.name}")
         click_on "Delete #{@pokemon1.name}"
+        
         expect(current_path).to eq("/pokemons")
         
         expect(page).to_not have_content(@pokemon1.name)

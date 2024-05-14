@@ -58,6 +58,15 @@ describe "Pokemon Index Page" do
         expect(page).to have_content("Special: 50")
         expect(page).to have_content("Trainer ID: #{@trainer1.id}")
         expect(page).to have_content("In Team: true")
+        
+        expect(page).to have_content("Name: Squirtle")
+        expect(page).to have_content("Type: Water")
+        expect(page).to have_content("Level: 36")
+        expect(page).to have_content("Hit Points: 44")
+        expect(page).to have_content("Attack: 48")
+        expect(page).to have_content("Defense: 65")
+        expect(page).to have_content("Speed: 43")
+        expect(page).to have_content("Special: 51")
       end
 
       # User Story 8, Child Index Link

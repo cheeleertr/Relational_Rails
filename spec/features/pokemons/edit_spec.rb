@@ -29,6 +29,16 @@ describe "Pokemon Edit Page" do
         )
         visit "/pokemons/#{pokemon1.id}/edit"
 
+        expect(page).to have_field("pokemon[name]")
+        expect(page).to have_field("pokemon[pokemon_type]")
+        expect(page).to have_field("pokemon[level]")
+        expect(page).to have_field("pokemon[hit_points]")
+        expect(page).to have_field("pokemon[attack]")
+        expect(page).to have_field("pokemon[defense]")
+        expect(page).to have_field("pokemon[speed]")
+        expect(page).to have_field("pokemon[special]")
+        expect(page).to have_field("pokemon[in_team]")
+
         fill_in "pokemon[name]", with: "Raichu"
         fill_in "pokemon[pokemon_type]", with: "Electric"
         fill_in "pokemon[level]", with: 55
@@ -39,7 +49,7 @@ describe "Pokemon Edit Page" do
         fill_in "pokemon[special]", with: 90
         fill_in "pokemon[in_team]", with: true
         click_on 'Update Pokemon'
-        # save_and_open_page
+
         expect(current_path).to eq("/pokemons/#{pokemon1.id}")
         expect(page).to have_content("Raichu")
         expect(page).to have_content("Type: Electric")

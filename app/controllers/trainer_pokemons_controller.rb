@@ -15,7 +15,6 @@ class TrainerPokemonsController < ApplicationController
       @pokemons
     end
     #may have to combine order and threshold when using both?
-
   end
 
   def new

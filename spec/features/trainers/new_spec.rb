@@ -17,6 +17,10 @@ describe "Trainer New Page" do
       it "I can create a new Trainer" do
         visit '/trainers/new' 
         
+        expect(page).to have_field("trainer[name]")
+        expect(page).to have_field("trainer[badges]")
+        expect(page).to have_field("trainer[full_team_of_six]")
+        
         fill_in "trainer[name]", with: "Brock"
         fill_in "trainer[badges]", with: 5
         fill_in "trainer[full_team_of_six]", with: false

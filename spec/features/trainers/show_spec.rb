@@ -36,6 +36,7 @@ describe "Trainer Show Page" do
         in_team: false,
       )
     end
+    
     describe "When I visit Trainer Show Page" do
       it "I see the trainer with that id including the trainer's attributes" do
         visit "/trainers/#{@trainer1.id}"
