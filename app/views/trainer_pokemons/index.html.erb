@@ -1,7 +1,7 @@
 <%= link_to "Create Pokemon", "/trainers/#{@trainer.id}/pokemons/new" %>
 <%= link_to "Sort by Name", "/trainers/#{@trainer.id}/pokemons?order=name" %>
 
-<%= form_with url: "/trainers/#{@trainer.id}/pokemons?threshold=number", method: :get, data: { turbo: false } do |form| %>
+<%= form_with url: "/trainers/#{@trainer.id}/pokemons", method: :get, data: { turbo: false } do |form| %>
   <%= form.label "Only return pokemons with level over: " %>
   <%= form.number_field :threshold, in: 1..100, :placeholder => "number" %>
   <%= form.submit 'Filter' %>
@@ -19,5 +19,5 @@
   <p><%= "Trainer ID: #{pokemon.trainer_id}" %></p>
   <p><%= "In Team: #{pokemon.in_team}" %></p>
   <%= link_to "Update #{pokemon.name}", "/pokemons/#{pokemon.id}/edit" %>
-  <%= link_to "Delete #{pokemon.name}", "/pokemons/#{pokemon.id}/", method: :delete %>
+  <%= link_to "Delete #{pokemon.name}", "/pokemons/#{pokemon.id}/", data: {turbo_method: :delete} %>
 <% end %>
