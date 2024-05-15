@@ -19,5 +19,5 @@
   <p><%= "Trainer ID: #{pokemon.trainer_id}" %></p>
   <p><%= "In Team: #{pokemon.in_team}" %></p>
   <%= link_to "Update #{pokemon.name}", "/pokemons/#{pokemon.id}/edit" %>
-  <%= link_to "Delete #{pokemon.name}", "/pokemons/#{pokemon.id}/", method: :delete %>
+  <%= link_to "Delete #{pokemon.name}", "/pokemons/#{pokemon.id}/", data: {turbo_method: :delete} %>
 <% end %>
